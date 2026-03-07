@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sign Up | Homemade Pickles & Snacks</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(120deg,#f8f1e4,#fff5e6);
+height:100vh;
+margin:0;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* SIGNUP BOX */
+
+.signup-container{
+background:white;
+padding:40px;
+width:380px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+/* TITLE */
+
+h2{
+font-family:'Playfair Display',serif;
+color:#4C7244;
+margin-bottom:25px;
+font-size:2.2rem;
+}
+
+/* ERROR MESSAGE */
+
+.error-message{
+background:#ffe5e5;
+color:#d8000c;
+padding:10px;
+border-radius:6px;
+margin-bottom:15px;
+font-size:14px;
+}
+
+/* INPUT FIELDS */
+
+.input-group{
+margin-bottom:18px;
+}
+
+input{
+width:100%;
+padding:12px;
+border:1px solid #ccc;
+border-radius:6px;
+font-size:15px;
+box-sizing:border-box;
+}
+
+input:focus{
+outline:none;
+border-color:#4C7244;
+box-shadow:0 0 6px rgba(76,114,68,0.2);
+}
+
+/* BUTTON */
+
+button{
+width:100%;
+background:#4C7244;
+color:white;
+border:none;
+padding:12px;
+border-radius:6px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#3a5a35;
+}
+
+/* LOGIN LINK */
+
+.login-link{
+margin-top:18px;
+font-size:14px;
+}
+
+.login-link a{
+color:#4C7244;
+text-decoration:none;
+font-weight:600;
+}
+
+.login-link a:hover{
+text-decoration:underline;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.signup-container{
+width:90%;
+padding:30px;
+}
+
+h2{
+font-size:1.8rem;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="signup-container">
+
+{% if error %}
+<div class="error-message">
+{{ error }}
+</div>
+{% endif %}
+
+<h2>Create Account</h2>
+
+<form action="{{ url_for('signup') }}" method="POST" onsubmit="return validateForm()">
+
+<div class="input-group">
+<input type="text" name="username" placeholder="Choose Username" required>
+</div>
+
+<div class="input-group">
+<input type="email" name="email" placeholder="Email Address" required>
+</div>
+
+<div class="input-group">
+<input type="password" id="password" name="password" placeholder="Create Password" required>
+</div>
+
+<div class="input-group">
+<input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+</div>
+
+<button type="submit">Sign Up</button>
+
+</form>
+
+<div class="login-link">
+Already have an account?  
+<a href="{{ url_for('login') }}">Login</a>
+</div>
+
+</div>
+
+<script>
+
+function validateForm(){
+
+const password = document.getElementById("password").value;
+const confirm = document.getElementById("confirmPassword").value;
+
+if(password !== confirm){
+
+alert("Passwords do not match");
+return false;
+
+}
+
+return true;
+
+}
+
+</script>
+
+</body>
+</html>

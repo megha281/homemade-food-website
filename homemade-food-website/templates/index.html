@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grandma's Kitchen</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family: 'Montserrat', sans-serif;
+background:#fffaf3;
+color:#333;
+}
+
+/* NAVBAR */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 60px;
+background:#7b2d26;
+color:white;
+}
+
+.logo{
+font-size:22px;
+font-weight:600;
+}
+
+.navbar a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+font-weight:500;
+}
+
+.navbar a:hover{
+text-decoration:underline;
+}
+
+/* HERO SECTION */
+
+.hero{
+height:90vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),
+url("https://images.unsplash.com/photo-1604908177522-40221d8c96f8");
+background-size:cover;
+background-position:center;
+color:white;
+}
+
+.hero h1{
+font-family:'Merriweather', serif;
+font-size:50px;
+margin-bottom:20px;
+}
+
+.hero p{
+font-size:18px;
+max-width:600px;
+margin:auto;
+}
+
+.hero button{
+margin-top:30px;
+padding:12px 30px;
+border:none;
+background:#f4a261;
+color:white;
+font-size:16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+.hero button:hover{
+background:#e76f51;
+}
+
+/* FEATURES */
+
+.features{
+display:flex;
+justify-content:center;
+gap:40px;
+padding:60px;
+flex-wrap:wrap;
+}
+
+.card{
+background:white;
+padding:25px;
+width:250px;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.card h3{
+color:#7b2d26;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+padding:20px;
+background:#7b2d26;
+color:white;
+margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+<div class="logo">Grandma's Kitchen</div>
+<div>
+<a href="#">Home</a>
+<a href="#">Products</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+</div>
+</div>
+
+
+<section class="hero">
+
+<div>
+
+<h1>Traditional Homemade Pickles</h1>
+
+<p>
+Experience authentic homemade taste prepared with traditional recipes,
+fresh spices, and love from our kitchen.
+</p>
+
+<a href="{{ url_for('login') }}">
+<button>Start Shopping</button>
+</a>
+
+</div>
+
+</section>
+
+
+<section class="features">
+
+<div class="card">
+<h3>Authentic Taste</h3>
+<p>Prepared using traditional recipes passed through generations.</p>
+</div>
+
+<div class="card">
+<h3>Fresh Ingredients</h3>
+<p>Only natural spices and fresh ingredients used.</p>
+</div>
+
+<div class="card">
+<h3>Homemade Quality</h3>
+<p>Made in small batches to maintain homemade flavor.</p>
+</div>
+
+</section>
+
+
+<div class="footer">
+<p>© 2025 Grandma's Kitchen | Homemade Pickles & Snacks</p>
+</div>
+
+</body>
+</html>
