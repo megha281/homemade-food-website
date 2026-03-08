@@ -1,336 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - HomeMade Pickles & Snacks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f1e4;
+            margin: 0;
+            padding: 0;
+        }
 
-<title>Checkout | Grandma's Kitchen</title>
+        header {
+            background-color: rgba(76, 114, 68, 0.95);
+            padding: 12px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin-left: auto;
+            padding: 100;
+            align-items: left;
+        }
 
-<style>
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
 
-body{
-margin:0;
-font-family:'Montserrat',sans-serif;
-background:#fffaf3;
-color:#333;
-}
+        .cart-items-list {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 10px;
+        }
 
-/* NAVBAR */
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
 
-.navbar{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 60px;
-background:#7b2d26;
-color:white;
-position:fixed;
-width:100%;
-top:0;
-z-index:1000;
-}
+        .item-details {
+            flex-grow: 1;
+            margin-left: 15px;
+        }
 
-.navbar a{
-color:white;
-text-decoration:none;
-margin-left:20px;
-font-weight:500;
-}
+        .item-name {
+            font-weight: 600;
+            color: #4C7244;
+        }
 
-.navbar a:hover{
-text-decoration:underline;
-}
+        .item-price {
+            color: #666;
+            font-size: 0.9rem;
+        }
 
-/* PAGE CONTAINER */
+        .item-quantity {
+            color: #444;
+            font-weight: 500;
+        }
 
-.container{
-max-width:1100px;
-margin:120px auto;
-padding:30px;
-background:white;
-border-radius:10px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
 
-h2{
-text-align:center;
-font-family:'Merriweather',serif;
-color:#7b2d26;
-margin-bottom:30px;
-}
+        h2 {
+            color: #4C7244;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
 
-/* ORDER SUMMARY */
+        .form-group {
+            margin-bottom: 25px;
+        }
 
-.order-summary{
-background:#f8eee9;
-padding:20px;
-border-radius:10px;
-margin-bottom:30px;
-}
+        label {
+            display: block;
+            color: #4C7244;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
 
-.order-summary h3{
-margin-top:0;
-color:#7b2d26;
-}
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #4C7244;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-.cart-item{
-display:flex;
-justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #eee;
-}
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(76, 114, 68, 0.2);
+            border-color: #3A5A35;
+        }
 
-.item-name{
-font-weight:600;
-}
+        .order-summary {
+            background: rgba(76, 114, 68, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
 
-.item-details{
-font-size:14px;
-color:#666;
-}
+        .order-summary h3 {
+            color: #4C7244;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 15px;
+        }
 
-.total{
-font-weight:600;
-margin-top:10px;
-}
+        .order-summary p {
+            font-size: 1.1rem;
+            margin: 10px 0;
+            color: #666;
+        }
 
-/* FORM */
+        .confirm-btn {
+            background: #4C7244;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
 
-.form-group{
-margin-bottom:20px;
-}
+        .confirm-btn:hover {
+            background: #3A5A35;
+        }
 
-label{
-display:block;
-margin-bottom:6px;
-font-weight:600;
-}
-
-input,select{
-width:100%;
-padding:10px;
-border:1px solid #ccc;
-border-radius:6px;
-font-size:15px;
-}
-
-input:focus,select:focus{
-outline:none;
-border-color:#7b2d26;
-}
-
-/* BUTTON */
-
-.confirm-btn{
-width:100%;
-padding:12px;
-border:none;
-background:#f4a261;
-color:white;
-font-size:16px;
-border-radius:6px;
-cursor:pointer;
-margin-top:10px;
-}
-
-.confirm-btn:hover{
-background:#e76f51;
-}
-
-/* FOOTER */
-
-.footer{
-background:#7b2d26;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
-
-.error{
-color:red;
-text-align:center;
-margin-bottom:15px;
-}
-
-</style>
+        footer {
+            background-color: #4C7244;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- NAVBAR -->
-
-<div class="navbar">
-
-<div>Grandma's Kitchen</div>
-
-<div>
-<a href="{{ url_for('home') }}">Home</a>
-<a href="{{ url_for('cart') }}">Cart (<span id="cart-count">0</span>)</a>
-</div>
-
-</div>
-
-
-<div class="container">
-
-{% if error %}
-<div class="error">{{ error }}</div>
-{% endif %}
-
-<h2>Checkout</h2>
-
-
-<!-- ORDER SUMMARY -->
-
-<div class="order-summary">
-
-<h3>Your Order</h3>
-
-<div id="cart-items-list"></div>
-
-<p id="total-items" class="total"></p>
-
-<p id="total-amount" class="total"></p>
-
-</div>
-
-
-<!-- CHECKOUT FORM -->
-
-<form id="checkout-form" method="POST" action="{{ url_for('checkout') }}">
-
-<input type="hidden" name="cart_data" id="cart-data">
-<input type="hidden" name="total_amount" id="total-amount-data">
-
-<div class="form-group">
-<label>Full Name</label>
-<input type="text" name="name" required>
-</div>
-
-<div class="form-group">
-<label>Delivery Address</label>
-<input type="text" name="address" required>
-</div>
-
-<div class="form-group">
-<label>Phone Number</label>
-<input type="text" id="phone" name="phone" pattern="[0-9]{10}" required>
-</div>
-
-<div class="form-group">
-<label>Payment Method</label>
-
-<select name="payment" required>
-<option value="cod">Cash on Delivery</option>
-<option value="upi">UPI</option>
-<option value="card">Credit / Debit Card</option>
-</select>
-
-</div>
-
-<button type="submit" class="confirm-btn">Confirm Order</button>
-
-<p id="error-message" class="error"></p>
-
-</form>
-
-</div>
-
-
-<div class="footer">
-<p>© 2026 Grandma's Kitchen | Homemade Pickles & Snacks</p>
-</div>
-
-
-<script>
-
-/* KEEPING YOUR ORIGINAL CHECKOUT LOGIC */
-
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
-let totalAmount = 0;
-
-displayCartItems();
-
-function displayCartItems(){
-
-const container=document.getElementById('cart-items-list');
-const totalItemsElement=document.getElementById('total-items');
-const totalAmountElement=document.getElementById('total-amount');
-
-let html='';
-let totalItems=0;
-
-totalAmount=0;
-
-cart.forEach(item=>{
-
-totalItems+=item.qty;
-
-const itemTotal=item.price*item.qty;
-
-totalAmount+=itemTotal;
-
-html+=`
-<div class="cart-item">
-
-<div>
-<div class="item-name">${item.name}</div>
-<div class="item-details">
-Qty: ${item.qty} | ₹${item.price}/unit
-</div>
-</div>
-
-<div>₹${itemTotal}</div>
-
-</div>
-`;
-
-});
-
-container.innerHTML=html;
-
-totalItemsElement.textContent=`Total Items: ${totalItems}`;
-
-totalAmountElement.textContent=`Total Amount: ₹${totalAmount}`;
-
-document.getElementById('cart-data').value=JSON.stringify(cart);
-document.getElementById('total-amount-data').value=totalAmount;
-
-document.getElementById('cart-count').textContent=totalItems;
-
-}
-
-
-document.getElementById('checkout-form').addEventListener('submit',function(e){
-
-e.preventDefault();
-
-if(cart.length===0){
-
-document.getElementById('error-message').textContent="Your cart is empty.";
-
-return;
-
-}
-
-const phoneInput=document.getElementById('phone');
-
-if(!/^\d{10}$/.test(phoneInput.value)){
-
-alert("Enter a valid 10 digit phone number");
-
-return;
-
-}
-
-this.submit();
-
-});
-
-</script>
-
+    <header>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('cart') }}">🛒 Cart <span id="cart-count">0</span></a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        {% if error %}
+        <div class="error-message" style="color: #ff4444; padding: 15px; margin-bottom: 20px; background: #ffebee; border-radius: 8px; text-align: center;">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <h2>Checkout</h2>
+    
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div id="cart-items-list" class="cart-items-list"></div>
+            <p id="total-items" style="font-weight: 600;">Total Items: </p>
+            <p id="total-amount" style="font-weight: 600;">Total Amount: ₹ </p>
+        </div>
+
+        <form id="checkout-form" method="POST" action="{{ url_for('checkout') }}">
+            <input type="hidden" name="cart_data" id="cart-data">
+            <input type="hidden" name="total_amount" id="total-amount-data">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Delivery Address</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" pattern="[0-9]{10}" title="10 digit phone number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="payment">Payment Method</label>
+                <select id="payment" name="payment" required>
+                    <option value="cod">Cash on Delivery</option>
+                    <option value="upi">UPI</option>
+                    <option value="card">Credit/Debit Card</option>
+                </select>
+            </div>
+
+            <button type="submit" class="confirm-btn">Confirm Order</button>
+            <p id="error-message" style="color: red; text-align: center;"></p>
+        </form>
+    </div>
+
+    <footer>
+        <p>© 2024 HomeMade Pickles. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Get cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let totalAmount = 0;
+    
+        // Initialize cart display when page loads
+        displayCartItems();
+
+        function displayCartItems() {
+            const container = document.getElementById('cart-items-list');
+            const totalItemsElement = document.getElementById('total-items');
+            const totalAmountElement = document.getElementById('total-amount');
+            
+            let html = '';
+            let totalItems = 0;
+            totalAmount = 0;
+    
+            cart.forEach(item => {
+                totalItems += item.qty;
+                const itemTotal = item.price * item.qty;
+                totalAmount += itemTotal;
+    
+                html += `
+                    <div class="cart-item">
+                        <span class="item-name">${item.name} (${item.weight})</span>
+                        <div class="item-details">
+                            <span class="item-quantity">Qty: ${item.qty}</span>
+                            <span class="item-price">₹${item.price}/unit</span>
+                        </div>
+                        <span class="item-total">₹${itemTotal}</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalItemsElement.textContent = `Total Items: ${totalItems}`;
+            totalAmountElement.textContent = `Total Amount: ₹${totalAmount}`;
+
+            // Update hidden inputs for form submission
+            document.getElementById('cart-data').value = JSON.stringify(cart);
+            document.getElementById('total-amount-data').value = totalAmount;
+            
+            // Update cart count in header
+            document.getElementById('cart-count').textContent = totalItems;
+        }
+
+        document.getElementById('checkout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Ensure cart is not empty
+            if (cart.length === 0) {
+                document.getElementById('error-message').textContent = "Your cart is empty. Add items before proceeding!";
+                return;
+            }
+
+            // Validate phone number format
+            const phoneInput = document.getElementById('phone');
+            if (!/^\d{10}$/.test(phoneInput.value)) {
+                alert('Please enter a valid 10-digit phone number');
+                return;
+            }
+
+            // Debugging: Log cart data before submitting
+            console.log("Submitting order with data:", {
+                cart_data: JSON.stringify(cart),
+                total_amount: totalAmount
+            });
+
+            // Submit form
+            this.submit();
+        });
+
+    </script>
 </body>
 </html>
